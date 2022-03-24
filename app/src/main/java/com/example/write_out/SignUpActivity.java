@@ -24,6 +24,7 @@ public class SignUpActivity extends AppCompatActivity {
     Button LoginHere;
     Button btnRegister;
     FirebaseAuth mAuth;
+    EditText signUpUserName;
 
     @SuppressLint("WrongViewCast")
     @Override
