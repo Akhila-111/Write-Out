@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -17,8 +18,9 @@ public class MainActivity extends AppCompatActivity {
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    Button LOGOUT ;
-    FirebaseAuth mAuth;
+    private Button LOGOUT ;
+     FirebaseAuth mAuth;
+     private FloatingActionButton floatingActionButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.viewPager);
         LOGOUT = findViewById(R.id.button8);
         mAuth = FirebaseAuth.getInstance();
+        floatingActionButton = findViewById(R.id.fab);
 
 
         tabLayout.setupWithViewPager(viewPager);
@@ -37,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
         vpAdapter.addFragment(new Favourites(),"Favourites");
         vpAdapter.addFragment(new ReadingList(),"ReadingList");
 
+        floatingActionButton.setOnClickListener(view -> {
+            startActivity(new Intent(MainActivity.this,ArticleDetail.class));
+        });
 
         LOGOUT.setOnClickListener(view -> {
             mAuth.signOut();
@@ -44,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
 
         });
     }
+
+
 
     @Override
     protected void onStart() {
