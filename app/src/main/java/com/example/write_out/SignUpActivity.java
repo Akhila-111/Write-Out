@@ -22,6 +22,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,6 +38,7 @@ public class SignUpActivity extends AppCompatActivity {
     Button btnRegister;
     FirebaseAuth mAuth;
     EditText signUpUserName;
+
 
     SharedPreferences sharedPreferences;
     private static final String Shared_pref_name = "mypref";
@@ -61,6 +64,7 @@ public class SignUpActivity extends AppCompatActivity {
            savedata();
 
        });
+
 
 
         LoginHere.setOnClickListener(view -> {

@@ -29,11 +29,27 @@ public class ArticleWriting extends AppCompatActivity {
 
         UserName = findViewById(R.id.textView9);
         add_text = findViewById(R.id.addText);
+
         sharedPreferences = getSharedPreferences(Shared_pref_name,MODE_PRIVATE);
-
-
         String name = sharedPreferences.getString(Key_Name,null);
         UserName.setText("User Name : " + name);
+
+        add_text.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if(view.getId()==R.id.addText)
+                {
+                    view.getParent().requestDisallowInterceptTouchEvent(true);
+                    switch (motionEvent.getAction() & MotionEvent.ACTION_MASK)
+                    {
+                        case MotionEvent.ACTION_UP:view.getParent().requestDisallowInterceptTouchEvent(false);
+                        break;
+                    }
+                }
+
+                return false;
+            }
+        });
 
     }
 
