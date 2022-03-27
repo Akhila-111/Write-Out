@@ -10,6 +10,7 @@ public class UserHelperClass {
         ArticleTitle = articleTitle;
         Category = category;
         DateOfPublication = dateOfPublication;
+
     }
 
     public String getUserName() {
@@ -20,7 +21,7 @@ public class UserHelperClass {
         return ArticleTitle;
     }
 
-
+    public String getCategory(){ return Category;}
 
     public String getDateOfPublication() {
         return DateOfPublication;

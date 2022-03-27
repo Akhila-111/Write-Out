@@ -68,7 +68,7 @@ public class ArticleDetail extends AppCompatActivity {
             String Category = category.getSelectedItem().toString();
             String DateOfPublication = dataOfPublication.getText().toString();
 
-            UserHelperClass helperClass = new UserHelperClass(userName,Category,ArticleTitle,DateOfPublication);
+            UserHelperClass helperClass = new UserHelperClass(userName,ArticleTitle,Category,DateOfPublication);
             reference.setValue(helperClass);
 
 

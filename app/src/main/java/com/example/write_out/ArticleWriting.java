@@ -5,11 +5,15 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.security.Key;
 import java.util.prefs.Preferences;
@@ -18,6 +22,9 @@ public class ArticleWriting extends AppCompatActivity {
 
     public TextView UserName;
     public EditText add_text;
+    public Button button ;
+    DatabaseReference reference;
+
     SharedPreferences sharedPreferences;
     private static final String Shared_pref_name = "mypref";
     private static final String Key_Name = "name";
@@ -29,10 +36,21 @@ public class ArticleWriting extends AppCompatActivity {
 
         UserName = findViewById(R.id.textView9);
         add_text = findViewById(R.id.addText);
+        button = findViewById(R.id.button7);
 
         sharedPreferences = getSharedPreferences(Shared_pref_name,MODE_PRIVATE);
         String name = sharedPreferences.getString(Key_Name,null);
         UserName.setText("User Name : " + name);
+
+        reference = FirebaseDatabase.getInstance().getReference().child("Users").child("userName");
+
+        button.setOnClickListener(view -> {
+            String ArticleBody = add_text.getText().toString();
+            String userName = UserName.getText().toString();
+
+            WritingHelperClass writingHelperClass = new WritingHelperClass(ArticleBody,userName);
+            reference.setValue(writingHelperClass);
+        });
 
         add_text.setOnTouchListener(new View.OnTouchListener() {
             @Override
