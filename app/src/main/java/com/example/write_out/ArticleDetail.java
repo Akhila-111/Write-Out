@@ -54,11 +54,6 @@ public class ArticleDetail extends AppCompatActivity {
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mySpinner.setAdapter(myAdapter);
 
-        String title = articleTitle.getText().toString();
-        if(TextUtils.isEmpty(title)){
-            articleTitle.setError("Title cannot be empty!");
-            articleTitle.requestFocus();
-        }
 
 
         button.setOnClickListener(view -> {
@@ -68,13 +63,23 @@ public class ArticleDetail extends AppCompatActivity {
             String Category = category.getSelectedItem().toString();
             String DateOfPublication = dataOfPublication.getText().toString();
 
-            UserHelperClass helperClass = new UserHelperClass(userName,ArticleTitle,Category,DateOfPublication);
-            reference.setValue(helperClass);
+            if(TextUtils.isEmpty(ArticleTitle))
+            {
+             articleTitle.setError("Title cannot be empty!");
+            }
+            else if(TextUtils.isEmpty(DateOfPublication))
+            {
+                dataOfPublication.setError("Please mention todays date..");
+            }
+            else {
+                UserHelperClass helperClass = new UserHelperClass(userName, ArticleTitle, Category, DateOfPublication);
+                reference.setValue(helperClass);
 
 
-            Toast.makeText(ArticleDetail.this,"Data inserted!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(ArticleDetail.this, "Data Saved!", Toast.LENGTH_SHORT).show();
 
-            startActivity(new Intent(ArticleDetail.this, ArticleWriting.class));
+                startActivity(new Intent(ArticleDetail.this, ArticleWriting.class));
+            }
         });
 
     }

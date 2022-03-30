@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -50,6 +51,8 @@ public class ArticleWriting extends AppCompatActivity {
 
             WritingHelperClass writingHelperClass = new WritingHelperClass(ArticleBody,userName);
             reference.setValue(writingHelperClass);
+
+            Toast.makeText(this, "ARTICLE UPLOADED", Toast.LENGTH_SHORT).show();
         });
 
         add_text.setOnTouchListener(new View.OnTouchListener() {
