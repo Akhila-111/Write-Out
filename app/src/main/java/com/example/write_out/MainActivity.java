@@ -39,14 +39,13 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         floatingActionButton = findViewById(R.id.fab);
 
-        ArrayList<String> arrayList = new ArrayList<>();
-        arrayList.add("My Articles");
-        arrayList.add("Others Articles");
-        arrayList.add("Favourites");
-        arrayList.add("Reading List");
-
-        prepareViewPager(viewPager,arrayList);
         tabLayout.setupWithViewPager(viewPager);
+        Adapter adapter = new Adapter(getSupportFragmentManager(),FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        Adapter.addFragment(new MyArticles(),"My Articles");
+        Adapter.addFragment(new OthersArticles(),"Others Articles");
+        Adapter.addFragment(new Favourites(),"Favourites");
+        Adapter.addFragment(new ReadingList(),"Reading List");
+        viewPager.setAdapter(adapter);
 
         floatingActionButton.setOnClickListener(view -> {
             startActivity(new Intent(MainActivity.this,ArticleDetail.class));
@@ -59,21 +58,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void prepareViewPager(ViewPager viewPager, ArrayList<String> arrayList) {
-        MainAdapter adapter = new MainAdapter (getSupportFragmentManager());
-        MyArticles fragment = new MyArticles();
-        for(int i=0;i<arrayList.size();i++){
-            Bundle bundle =  new Bundle();
-            bundle.putString("title",arrayList.get(i));
-            fragment.setArguments(bundle);
-            adapter.addFragment(fragment,arrayList.get(i));
-            fragment = new MyArticles();
-
-        }
-        viewPager.setAdapter(adapter);
-    }
-
-
     @Override
     protected void onStart() {
         super.onStart();
@@ -83,34 +67,4 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private class MainAdapter extends FragmentPagerAdapter {
-        ArrayList<String> arrayList = new ArrayList<>();
-        List<Fragment> fragmentList = new ArrayList<>();
-
-        public void addFragment(Fragment fragment,String title){
-            arrayList.add(title);
-            fragmentList.add(fragment);
-        }
-
-        public MainAdapter(@NonNull FragmentManager fm) {
-            super(fm);
-        }
-
-        @NonNull
-        @Override
-        public Fragment getItem(int position) {
-            return fragmentList.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return fragmentList.size();
-        }
-
-        @Nullable
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return arrayList.get(position);
-        }
-    }
 }
