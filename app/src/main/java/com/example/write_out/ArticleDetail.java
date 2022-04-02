@@ -47,7 +47,7 @@ public class ArticleDetail extends AppCompatActivity {
         String name = sharedPreferences.getString(Key_Name,null);
         UserName.setText("User Name : " + name);
 
-        reference = FirebaseDatabase.getInstance().getReference().child("Users");
+        reference = FirebaseDatabase.getInstance().getReference().child(name);
 
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(ArticleDetail.this,
                 android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.names));
@@ -69,7 +69,7 @@ public class ArticleDetail extends AppCompatActivity {
             }
             else if(TextUtils.isEmpty(DateOfPublication))
             {
-                dataOfPublication.setError("Please mention todays date..");
+                dataOfPublication.setError("Please mention today's date..");
             }
             else {
                 UserHelperClass helperClass = new UserHelperClass(userName, ArticleTitle, Category, DateOfPublication);
