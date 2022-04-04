@@ -47,7 +47,7 @@ public class MyArticles extends Fragment {
         dataholder = new ArrayList<>();
         database = FirebaseDatabase.getInstance().getReference("Users");
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
 
      /*   LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(linearLayoutManager);   */
@@ -70,7 +70,7 @@ public class MyArticles extends Fragment {
                    dataModelClass data = dataSnapshot.getValue(dataModelClass.class);
                    dataholder.add(data);
                 }
-
+           /*     myAdapterClass.notifyItemChanged(); */ 
             }
 
             @Override
