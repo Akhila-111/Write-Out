@@ -110,6 +110,29 @@
                 android:textSize="20sp"/>
 
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ArticleBody : "
+                android:textColor="@color/black"
+                android:textSize="26sp"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/articleBody"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="About the Article"
+                android:layout_marginLeft="8dp"
+                android:textColor="@color/black"
+                android:textSize="20sp"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

@@ -41,9 +41,9 @@ public class ArticleWriting extends AppCompatActivity {
 
         sharedPreferences = getSharedPreferences(Shared_pref_name,MODE_PRIVATE);
         String name = sharedPreferences.getString(Key_Name,null);
-        UserName.setText("User Name : " + name);
+        UserName.setText(name);
 
-        reference = FirebaseDatabase.getInstance().getReference().child(name).child("ArticleBody");
+        reference = FirebaseDatabase.getInstance().getReference().child("ArticleBody");
 
         button.setOnClickListener(view -> {
             String ArticleBody = add_text.getText().toString();

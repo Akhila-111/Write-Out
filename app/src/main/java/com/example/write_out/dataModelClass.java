@@ -1,17 +1,18 @@
 package com.example.write_out;
 
 public class dataModelClass {
-    String userName, ArticleTitle, Category, DateOfPublication, ArticleBody;
+    String userName = " ", ArticleTitle = " ", Category = " ", DateOfPublication = " ", ArticleBody = " ";
 
     dataModelClass() {
 
     }
 
-    public dataModelClass(String userName, String articleTitle, String category, String dateOfPublication) {
+    public dataModelClass(String userName, String articleTitle, String category, String dateOfPublication,String articleBody) {
         this.userName = userName;
         this.ArticleTitle = articleTitle;
         this.Category = category;
         this.DateOfPublication = dateOfPublication;
+        this.ArticleBody = articleBody;
 
     }
 
@@ -31,5 +32,6 @@ public class dataModelClass {
         return DateOfPublication;
     }
 
+    public String getArticleBody() { return ArticleBody;}
 
 }

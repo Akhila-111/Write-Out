@@ -24,6 +24,7 @@ public class ArticleDetail extends AppCompatActivity {
     private Spinner category;
     private EditText dataOfPublication;
 
+
     DatabaseReference reference;
 
     SharedPreferences sharedPreferences;
@@ -47,7 +48,7 @@ public class ArticleDetail extends AppCompatActivity {
         String name = sharedPreferences.getString(Key_Name,null);
         UserName.setText("User Name : " + name);
 
-        reference = FirebaseDatabase.getInstance().getReference().child(name);
+        reference = FirebaseDatabase.getInstance().getReference().child("Users");
 
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(ArticleDetail.this,
                 android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.names));
@@ -73,7 +74,7 @@ public class ArticleDetail extends AppCompatActivity {
             }
             else {
                 UserHelperClass helperClass = new UserHelperClass(userName, ArticleTitle, Category, DateOfPublication);
-                reference.setValue(helperClass);
+                reference.child(helperClass.ArticleTitle).setValue(helperClass);
 
 
                 Toast.makeText(ArticleDetail.this, "Data Saved!", Toast.LENGTH_SHORT).show();

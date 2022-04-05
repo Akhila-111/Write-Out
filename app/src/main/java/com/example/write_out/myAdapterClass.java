@@ -16,9 +16,9 @@ import java.util.ArrayList;
 public class myAdapterClass extends RecyclerView.Adapter<myAdapterClass.myviewholder>
 {
     MyArticles context;
-    ArrayList<dataModelClass> dataholder;
+    ArrayList<UserHelperClass> dataholder;
 
-    public myAdapterClass(MyArticles context, ArrayList<dataModelClass> dataholder) {
+    public myAdapterClass(MyArticles context, ArrayList<UserHelperClass> dataholder) {
         this.context = context;
         this.dataholder = dataholder;
     }
@@ -33,10 +33,12 @@ public class myAdapterClass extends RecyclerView.Adapter<myAdapterClass.myviewho
     @Override
     public void onBindViewHolder(@NonNull myviewholder holder, int position)
     {
+        UserHelperClass DataModelClass = dataholder.get(position);
         holder.userName.setText(dataholder.get(position).getUserName());
         holder.ArticleTitle.setText(dataholder.get(position).getArticleTitle());
         holder.Category.setText(dataholder.get(position).getCategory());
         holder.DateOfPublication.setText(dataholder.get(position).getDateOfPublication());
+       // holder.ArticleBody.setText(dataholder.get(position).getArticleBody());
     }
 
     @Override
@@ -50,6 +52,7 @@ public class myAdapterClass extends RecyclerView.Adapter<myAdapterClass.myviewho
         TextView ArticleTitle;
         TextView Category;
         TextView DateOfPublication;
+        TextView ArticleBody;
 
 
         public myviewholder(@NonNull View itemView) {
@@ -58,6 +61,7 @@ public class myAdapterClass extends RecyclerView.Adapter<myAdapterClass.myviewho
             ArticleTitle = itemView.findViewById(R.id.title);
             Category = itemView.findViewById(R.id.category);
             DateOfPublication = itemView.findViewById(R.id.date);
+            ArticleBody = itemView.findViewById(R.id.articleBody);
 
         }
     }

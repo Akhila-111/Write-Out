@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +31,7 @@ public class MyArticles extends Fragment {
     RecyclerView recyclerView;
     DatabaseReference database;
     myAdapterClass Myadapter;
-    ArrayList<dataModelClass> dataholder;
+    ArrayList<UserHelperClass> dataholder;
 
 
 
@@ -44,10 +45,10 @@ public class MyArticles extends Fragment {
         View view = inflater.inflate(R.layout.fragment_my_articles, container, false);
         recyclerView = view.findViewById(R.id.recview);
     /*    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));*/
-        dataholder = new ArrayList<>();
+      //  dataholder = new ArrayList<>();
         database = FirebaseDatabase.getInstance().getReference("Users");
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
      /*   LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(linearLayoutManager);   */
@@ -58,7 +59,7 @@ public class MyArticles extends Fragment {
 
         dataholder = new ArrayList<>();
         Myadapter = new myAdapterClass(this,dataholder);
-        recyclerView.setAdapter(Myadapter);
+
 
 
         database.addValueEventListener(new ValueEventListener() {
@@ -67,10 +68,12 @@ public class MyArticles extends Fragment {
 
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
 
-                   dataModelClass data = dataSnapshot.getValue(dataModelClass.class);
+                   UserHelperClass data = dataSnapshot.getValue(UserHelperClass.class);
+                    Log.d("Tag",data.userName);
                    dataholder.add(data);
+                    Myadapter.notifyDataSetChanged();
                 }
-           /*     myAdapterClass.notifyItemChanged(); */ 
+
             }
 
             @Override
@@ -94,7 +97,8 @@ public class MyArticles extends Fragment {
         dataModelClass ob5 = new dataModelClass("Akhila","CEO","Business","date");
         dataholder.add(ob1);
 
-        recyclerView.setAdapter(new myAdapterClass(dataholder)); */
+        recyclerView.setAdapter(new myAdapterClass(dataholder));  */
+        recyclerView.setAdapter(Myadapter);
         return view;
 
     }
