@@ -46,7 +46,7 @@ public class ArticleDetail extends AppCompatActivity {
 
         sharedPreferences = getSharedPreferences(Shared_pref_name,MODE_PRIVATE);
         String name = sharedPreferences.getString(Key_Name,null);
-        UserName.setText("User Name : " + name);
+        UserName.setText(name);
 
         reference = FirebaseDatabase.getInstance().getReference().child("Users");
 
@@ -74,7 +74,7 @@ public class ArticleDetail extends AppCompatActivity {
             }
             else {
                 UserHelperClass helperClass = new UserHelperClass(userName, ArticleTitle, Category, DateOfPublication);
-                reference.child(helperClass.ArticleTitle).setValue(helperClass);
+                reference.child(helperClass.userName).setValue(helperClass);
 
 
                 Toast.makeText(ArticleDetail.this, "Data Saved!", Toast.LENGTH_SHORT).show();

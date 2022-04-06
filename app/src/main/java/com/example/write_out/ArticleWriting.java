@@ -43,12 +43,11 @@ public class ArticleWriting extends AppCompatActivity {
         String name = sharedPreferences.getString(Key_Name,null);
         UserName.setText(name);
 
-        reference = FirebaseDatabase.getInstance().getReference().child("ArticleBody");
+        reference = FirebaseDatabase.getInstance().getReference();
 
         button.setOnClickListener(view -> {
             String ArticleBody = add_text.getText().toString();
             String userName = UserName.getText().toString();
-
             reference.setValue(ArticleBody);
 
             Toast.makeText(this, "ARTICLE UPLOADED", Toast.LENGTH_SHORT).show();

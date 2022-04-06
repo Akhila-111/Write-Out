@@ -27,14 +27,16 @@
             android:textColor="@color/black"
             android:textSize="26sp"
             android:textStyle="bold"/>
+
         <TextView
             android:id="@+id/username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Akhila"
             android:layout_marginLeft="8dp"
+            android:text=""
+            android:layout_gravity="center"
             android:textColor="@color/black"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
 
     </LinearLayout>
 
@@ -55,7 +57,8 @@
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CEO"
+            android:text=""
+            android:layout_gravity="center"
             android:layout_marginLeft="8dp"
             android:textColor="@color/black"
             android:textSize="20sp"/>
@@ -80,7 +83,8 @@
                 android:id="@+id/category"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Business"
+                android:text=""
+                android:layout_gravity="center"
                 android:layout_marginLeft="8dp"
                 android:textColor="@color/black"
                 android:textSize="20sp"/>
@@ -104,7 +108,8 @@
                 android:id="@+id/date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="02-08-2003"
+                android:text=""
+                android:layout_gravity="center"
                 android:layout_marginLeft="8dp"
                 android:textColor="@color/black"
                 android:textSize="20sp"/>
@@ -127,7 +132,8 @@
                 android:id="@+id/articleBody"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="About the Article"
+                android:text=""
+                android:layout_gravity="center"
                 android:layout_marginLeft="8dp"
                 android:textColor="@color/black"
                 android:textSize="20sp"/>
