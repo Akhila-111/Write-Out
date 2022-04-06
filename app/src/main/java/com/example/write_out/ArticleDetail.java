@@ -30,6 +30,9 @@ public class ArticleDetail extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     private static final String Shared_pref_name = "mypref";
     private static final String Key_Name = "name";
+    private static final String Key_articleTitle = "title";
+    private static final String Key_category = "category";
+    private static final String Key_dataOfPublication  = "date";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +51,7 @@ public class ArticleDetail extends AppCompatActivity {
         String name = sharedPreferences.getString(Key_Name,null);
         UserName.setText(name);
 
+
         reference = FirebaseDatabase.getInstance().getReference().child("Users");
 
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(ArticleDetail.this,
@@ -58,7 +62,7 @@ public class ArticleDetail extends AppCompatActivity {
 
 
         button.setOnClickListener(view -> {
-
+            saveData();
             String userName = UserName.getText().toString();
             String ArticleTitle = articleTitle.getText().toString();
             String Category = category.getSelectedItem().toString();
@@ -73,8 +77,8 @@ public class ArticleDetail extends AppCompatActivity {
                 dataOfPublication.setError("Please mention today's date..");
             }
             else {
-                UserHelperClass helperClass = new UserHelperClass(userName, ArticleTitle, Category, DateOfPublication);
-                reference.child(helperClass.userName).setValue(helperClass);
+            //    UserHelperClass helperClass = new UserHelperClass(userName, ArticleTitle, Category, DateOfPublication);
+              //  reference.child(helperClass.userName).setValue(helperClass);
 
 
                 Toast.makeText(ArticleDetail.this, "Data Saved!", Toast.LENGTH_SHORT).show();
@@ -83,5 +87,14 @@ public class ArticleDetail extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void saveData() {
+        sharedPreferences = getSharedPreferences(Shared_pref_name, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(Key_articleTitle, articleTitle.getText().toString());
+        editor.putString(Key_category, category.getSelectedItem().toString());
+        editor.putString(Key_dataOfPublication, dataOfPublication.getText().toString());
+        editor.apply();
     }
 }

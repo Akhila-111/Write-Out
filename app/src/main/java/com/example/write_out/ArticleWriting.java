@@ -17,11 +17,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.security.Key;
+import java.util.Locale;
 import java.util.prefs.Preferences;
 
 public class ArticleWriting extends AppCompatActivity {
 
     public TextView UserName;
+    public TextView Title;
+    public TextView Category;
+    public TextView DateOfPublication;
     public EditText add_text;
     public Button button ;
     DatabaseReference reference;
@@ -29,26 +33,46 @@ public class ArticleWriting extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     private static final String Shared_pref_name = "mypref";
     private static final String Key_Name = "name";
+    private static final String Key_articleTitle = "title";
+    private static final String Key_category = "category";
+    private static final String Key_dataOfPublication  = "date";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.article_writing);
 
-        UserName = findViewById(R.id.textView9);
+        UserName = findViewById(R.id.edittext5);
         add_text = findViewById(R.id.addText);
         button = findViewById(R.id.button7);
+        Title = findViewById(R.id.textView10);
+        Category = findViewById(R.id.textView11);
+        DateOfPublication = findViewById(R.id.textView12);
 
         sharedPreferences = getSharedPreferences(Shared_pref_name,MODE_PRIVATE);
         String name = sharedPreferences.getString(Key_Name,null);
-        UserName.setText(name);
+        String title = sharedPreferences.getString(Key_articleTitle,null);
+        String category  = sharedPreferences.getString(Key_category,null);
+        String date = sharedPreferences.getString(Key_dataOfPublication,null);
 
-        reference = FirebaseDatabase.getInstance().getReference();
+        UserName.setText(name);
+        Title.setText(title);
+        Category.setText(category);
+        DateOfPublication.setText(date);
+
+        reference = FirebaseDatabase.getInstance().getReference().child("Users");
 
         button.setOnClickListener(view -> {
-            String ArticleBody = add_text.getText().toString();
+            String Articlebody = add_text.getText().toString();
             String userName = UserName.getText().toString();
-            reference.setValue(ArticleBody);
+
+        //    String category = Category.getText().toString();
+           // String Arttitle = Title.getText().toString();
+         //   String dataOfPublication = DateOfPublication.getText().toString();
+         //  reference.setValue(ArticleBody);
+
+            UserHelperClass helperClass = new UserHelperClass(userName,title, category,date,Articlebody);
+            reference.child(helperClass.userName).setValue(helperClass);
 
             Toast.makeText(this, "ARTICLE UPLOADED", Toast.LENGTH_SHORT).show();
         });
