@@ -48,7 +48,7 @@ public class MyArticles extends Fragment {
       //  dataholder = new ArrayList<>();
         database = FirebaseDatabase.getInstance().getReference("Users");
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
 
      /*   LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(linearLayoutManager);   */
