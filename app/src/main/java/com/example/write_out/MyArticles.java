@@ -44,16 +44,13 @@ public class MyArticles extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_my_articles, container, false);
         recyclerView = view.findViewById(R.id.recview);
-    /*    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));*/
-      //  dataholder = new ArrayList<>();
+
+        dataholder = new ArrayList<>();
         database = FirebaseDatabase.getInstance().getReference("Users");
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
 
-     /*   LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(linearLayoutManager);   */
-
-      /*  FirebaseRecyclerOptions<dataModelClass> options =
+   /*  FirebaseRecyclerOptions<dataModelClass> options =
                 new FirebaseRecyclerOptions.Builder<dataModelClass>()
                          .setQuerry(FirebaseDatabase.getInstance().getReference().child("Users"),dataModelClass.class); */
 
@@ -69,11 +66,11 @@ public class MyArticles extends Fragment {
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
 
                    UserHelperClass data = dataSnapshot.getValue(UserHelperClass.class);
-                    Log.d("Tag",data.userName);
+                //    Log.d("Tag",data.userName);
                    dataholder.add(data);
-                    Myadapter.notifyDataSetChanged();
-                }
 
+                }
+                Myadapter.notifyDataSetChanged();
             }
 
             @Override

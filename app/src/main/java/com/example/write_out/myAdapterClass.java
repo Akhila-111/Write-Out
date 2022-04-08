@@ -33,12 +33,12 @@ public class myAdapterClass extends RecyclerView.Adapter<myAdapterClass.myviewho
     @Override
     public void onBindViewHolder(@NonNull myviewholder holder, int position)
     {
-       // UserHelperClass helperClass = dataholder.get(position);
+        UserHelperClass helperClass = dataholder.get(position);
         holder.userName.setText(dataholder.get(position).getUserName());
         holder.ArticleTitle.setText(dataholder.get(position).getArticleTitle());
         holder.Category.setText(dataholder.get(position).getCategory());
         holder.DateOfPublication.setText(dataholder.get(position).getDateOfPublication());
-        holder.ArticleBody.setText(dataholder.get(position).getBody());
+        holder.ArticleBody.setText(dataholder.get(position).getArticleBody());
     }
 
     @Override
