@@ -80,7 +80,7 @@ public class ArticleWriting extends AppCompatActivity {
          //  reference.setValue(ArticleBody);
 
             UserHelperClass helperClass = new UserHelperClass(userName,ArtTitle,Category,dateOfPub,Articlebody);
-            reference.child(helperClass.UserName).setValue(helperClass);
+            reference.child(helperClass.userName).setValue(helperClass);
 
             Toast.makeText(this, "ARTICLE UPLOADED", Toast.LENGTH_SHORT).show();
         });

@@ -37,7 +37,7 @@ public class myAdapterClass extends RecyclerView.Adapter<myAdapterClass.myviewho
         holder.userName.setText(dataholder.get(position).getUserName());
         holder.ArticleTitle.setText(dataholder.get(position).getArticleTitle());
         holder.Category.setText(dataholder.get(position).getCategory());
-        holder.DateOfPublication.setText(dataholder.get(position).getDateOfPub());
+        holder.DateOfPublication.setText(dataholder.get(position).getdateOfPublication());
         holder.ArticleBody.setText(dataholder.get(position).getArticleBody());
     }
 
