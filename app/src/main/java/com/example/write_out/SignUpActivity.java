@@ -38,11 +38,13 @@ public class SignUpActivity extends AppCompatActivity {
     Button btnRegister;
     FirebaseAuth mAuth;
     EditText signUpUserName;
+    DatabaseReference reference;
 
 
     SharedPreferences sharedPreferences;
     private static final String Shared_pref_name = "mypref";
     private static final String Key_Name = "name";
+    private static final String Key_SignUpEmail = "email";
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -58,8 +60,12 @@ public class SignUpActivity extends AppCompatActivity {
 
 
         mAuth = FirebaseAuth.getInstance();
+        reference = FirebaseDatabase.getInstance().getReference().child("Users");
 
        btnRegister.setOnClickListener(view -> {
+           String SignUpUserEmail = signUpEmail.getText().toString();
+           reference.setValue(SignUpUserEmail);
+
            createUser();
            savedata();
 
@@ -68,6 +74,8 @@ public class SignUpActivity extends AppCompatActivity {
 
 
         LoginHere.setOnClickListener(view -> {
+
+
             startActivity(new Intent(SignUpActivity.this,LoginActivity.class));
         });
     }

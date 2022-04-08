@@ -24,18 +24,20 @@ public class ArticleWriting extends AppCompatActivity {
 
     public TextView UserName;
     public TextView Title;
-    public TextView Category;
+    public TextView category;
     public TextView DateOfPublication;
     public EditText add_text;
     public Button button ;
-    DatabaseReference reference;
 
-    SharedPreferences sharedPreferences;
+    DatabaseReference reference ;
+
+    SharedPreferences sharedPreferences ;
     private static final String Shared_pref_name = "mypref";
     private static final String Key_Name = "name";
     private static final String Key_articleTitle = "title";
     private static final String Key_category = "category";
     private static final String Key_dataOfPublication  = "date";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,18 +48,19 @@ public class ArticleWriting extends AppCompatActivity {
         add_text = findViewById(R.id.addText);
         button = findViewById(R.id.button7);
         Title = findViewById(R.id.textView10);
-        Category = findViewById(R.id.textView11);
+        category = findViewById(R.id.textView11);
         DateOfPublication = findViewById(R.id.textView12);
 
         sharedPreferences = getSharedPreferences(Shared_pref_name,MODE_PRIVATE);
         String name = sharedPreferences.getString(Key_Name,null);
         String title = sharedPreferences.getString(Key_articleTitle,null);
-        String category  = sharedPreferences.getString(Key_category,null);
+        String categoryShPref  = sharedPreferences.getString(Key_category,null);
         String date = sharedPreferences.getString(Key_dataOfPublication,null);
+
 
         UserName.setText(name);
         Title.setText(title);
-        Category.setText(category);
+        category.setText(categoryShPref);
         DateOfPublication.setText(date);
 
         reference = FirebaseDatabase.getInstance().getReference().child("Users");
@@ -65,14 +68,19 @@ public class ArticleWriting extends AppCompatActivity {
         button.setOnClickListener(view -> {
             String Articlebody = add_text.getText().toString();
             String userName = UserName.getText().toString();
+            String Category = category.getText().toString();
+            String ArtTitle = Title.getText().toString();
+            String dateOfPub = DateOfPublication.getText().toString();
+
+
 
         //    String category = Category.getText().toString();
            // String Arttitle = Title.getText().toString();
          //   String dataOfPublication = DateOfPublication.getText().toString();
          //  reference.setValue(ArticleBody);
 
-            UserHelperClass helperClass = new UserHelperClass(userName,title, category,date,Articlebody);
-            reference.child(helperClass.userName).setValue(helperClass);
+            UserHelperClass helperClass = new UserHelperClass(userName,ArtTitle,Category,dateOfPub,Articlebody);
+            reference.child(helperClass.UserName).setValue(helperClass);
 
             Toast.makeText(this, "ARTICLE UPLOADED", Toast.LENGTH_SHORT).show();
         });
