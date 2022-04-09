@@ -57,7 +57,6 @@ public class ArticleWriting extends AppCompatActivity {
         String categoryShPref  = sharedPreferences.getString(Key_category,null);
         String date = sharedPreferences.getString(Key_dataOfPublication,null);
 
-
         UserName.setText(name);
         Title.setText(title);
         category.setText(categoryShPref);
@@ -72,14 +71,7 @@ public class ArticleWriting extends AppCompatActivity {
             String ArtTitle = Title.getText().toString();
             String dateOfPub = DateOfPublication.getText().toString();
 
-
-
-        //    String category = Category.getText().toString();
-           // String Arttitle = Title.getText().toString();
-         //   String dataOfPublication = DateOfPublication.getText().toString();
-         //  reference.setValue(ArticleBody);
             String s = userName + "_" + ArtTitle;
-
             UserHelperClass helperClass = new UserHelperClass(userName,ArtTitle,Category,dateOfPub,Articlebody);
             reference.child(s).setValue(helperClass);
 

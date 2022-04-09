@@ -61,7 +61,7 @@ public class myAdapterClass extends RecyclerView.Adapter<myAdapterClass.myviewho
             ArticleTitle = itemView.findViewById(R.id.title);
             Category = itemView.findViewById(R.id.category);
             DateOfPublication = itemView.findViewById(R.id.date);
-            ArticleBody = itemView.findViewById(R.id.articleBody);
+           // ArticleBody = itemView.findViewById(R.id.articleBody);
 
             itemView.setOnClickListener(this);
 
