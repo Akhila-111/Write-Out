@@ -17,10 +17,13 @@ public class myAdapterClass extends RecyclerView.Adapter<myAdapterClass.myviewho
 {
     MyArticles context;
     ArrayList<UserHelperClass> dataholder;
+    private RecyclerViewClickListener listener;
 
-    public myAdapterClass(MyArticles context,ArrayList<UserHelperClass> dataholder) {
+    public myAdapterClass(MyArticles context,ArrayList<UserHelperClass> dataholder,RecyclerViewClickListener listener)
+    {
         this.context = context;
         this.dataholder = dataholder;
+        this.listener = listener;
     }
 
     @NonNull
@@ -46,9 +49,10 @@ public class myAdapterClass extends RecyclerView.Adapter<myAdapterClass.myviewho
         return dataholder.size();
     }
 
-    class myviewholder extends RecyclerView.ViewHolder
+    class myviewholder extends RecyclerView.ViewHolder implements View.OnClickListener
     {
         TextView userName,ArticleTitle,Category,DateOfPublication,ArticleBody;
+
 
 
         public myviewholder(@NonNull View itemView) {
@@ -59,6 +63,16 @@ public class myAdapterClass extends RecyclerView.Adapter<myAdapterClass.myviewho
             DateOfPublication = itemView.findViewById(R.id.date);
             ArticleBody = itemView.findViewById(R.id.articleBody);
 
+            itemView.setOnClickListener(this);
+
         }
+
+        @Override
+        public void onClick(View view) {
+            listener.onClick(view,getAdapterPosition());
+        }
+    }
+    public interface  RecyclerViewClickListener{
+        void onClick(View v,int position);
     }
 }

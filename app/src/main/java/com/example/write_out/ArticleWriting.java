@@ -78,9 +78,10 @@ public class ArticleWriting extends AppCompatActivity {
            // String Arttitle = Title.getText().toString();
          //   String dataOfPublication = DateOfPublication.getText().toString();
          //  reference.setValue(ArticleBody);
+            String s = userName + "_" + ArtTitle;
 
             UserHelperClass helperClass = new UserHelperClass(userName,ArtTitle,Category,dateOfPub,Articlebody);
-            reference.push().child(helperClass.userName).setValue(helperClass);
+            reference.child(s).setValue(helperClass);
 
             Toast.makeText(this, "ARTICLE UPLOADED", Toast.LENGTH_SHORT).show();
         });

@@ -1,20 +1,17 @@
 package com.example.write_out;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,6 +29,7 @@ public class MyArticles extends Fragment {
     DatabaseReference database;
     myAdapterClass Myadapter;
     ArrayList<UserHelperClass> dataholder;
+    private myAdapterClass.RecyclerViewClickListener listener;
 
 
 
@@ -45,17 +43,16 @@ public class MyArticles extends Fragment {
         View view = inflater.inflate(R.layout.fragment_my_articles, container, false);
         recyclerView = view.findViewById(R.id.recview);
 
+        setOnClickListener();
         dataholder = new ArrayList<>();
         database = FirebaseDatabase.getInstance().getReference("Users");
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
 
-   /*  FirebaseRecyclerOptions<dataModelClass> options =
-                new FirebaseRecyclerOptions.Builder<dataModelClass>()
-                         .setQuerry(FirebaseDatabase.getInstance().getReference().child("Users"),dataModelClass.class); */
+  
 
         dataholder = new ArrayList<>();
-        Myadapter = new myAdapterClass(this,dataholder);
+        Myadapter = new myAdapterClass(this,dataholder,listener);
 
 
 
@@ -79,24 +76,21 @@ public class MyArticles extends Fragment {
             }
         });
 
-      /*  dataModelClass ob1 = new dataModelClass("Akhila","CEO","Business","date");
-        dataholder.add(ob1);
-
-        dataModelClass ob2 = new dataModelClass("Akhila","CEO","Business","date");
-        dataholder.add(ob1);
-
-        dataModelClass ob3 = new dataModelClass("Akhila","CEO","Business","date");
-        dataholder.add(ob1);
-
-        dataModelClass ob4 = new dataModelClass("Akhila","CEO","Business","date");
-        dataholder.add(ob1);
-
-        dataModelClass ob5 = new dataModelClass("Akhila","CEO","Business","date");
-        dataholder.add(ob1);
-
-        recyclerView.setAdapter(new myAdapterClass(dataholder));  */
         recyclerView.setAdapter(Myadapter);
         return view;
 
     }
+
+    private void setOnClickListener() {
+        listener = new myAdapterClass.RecyclerViewClickListener() {
+            @Override
+            public void onClick(View v, int position) {
+                Intent intent = new Intent(v.getContext(),ArticleActivity.class);
+                intent.putExtra("ArticleBody",dataholder.get(position).getArticleBody());
+                startActivity(intent);
+            }
+        };
+    }
+
+
 }

@@ -63,8 +63,6 @@ public class SignUpActivity extends AppCompatActivity {
         reference = FirebaseDatabase.getInstance().getReference().child("Users");
 
        btnRegister.setOnClickListener(view -> {
-           String SignUpUserEmail = signUpEmail.getText().toString();
-           reference.setValue(SignUpUserEmail);
 
            createUser();
            savedata();

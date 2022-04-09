@@ -15,8 +15,6 @@ public class UserHelperClass {
         this.category = category;
         this.dateOfPublication = dateOfPublication;
         this.articleBody = articleBody;
-
-
     }
 
 
