@@ -32,4 +32,24 @@ public class UserHelperClass {
     }
 
     public String getArticleBody() { return articleBody;}
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setArticleTitle(String articleTitle) {
+        this.articleTitle = articleTitle;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public void setDateOfPublication(String dateOfPublication) {
+        this.dateOfPublication = dateOfPublication;
+    }
+
+    public void setArticleBody(String articleBody) {
+        this.articleBody = articleBody;
+    }
 }
