@@ -74,7 +74,7 @@ public class myAdapterClass extends RecyclerView.Adapter<myAdapterClass.myviewho
                 filteredList.addAll(dataholderAll);
             } else {
                 for(UserHelperClass category: dataholderAll) {
-                    if(category.getCategory().toLowerCase(Locale.ROOT).contains(charSequence.toString().toLowerCase(Locale.ROOT))){
+                    if(category.getCategory().toLowerCase().contains(charSequence.toString().toLowerCase())){
                         filteredList.add(category);
                     }
                 }
