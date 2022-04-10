@@ -74,7 +74,7 @@ public class myAdapterClass extends RecyclerView.Adapter<myAdapterClass.myviewho
                 filteredList.addAll(dataholderAll);
             } else {
                 for(UserHelperClass category: dataholderAll) {
-                    if(category.getCategory().toLowerCase().contains(charSequence.toString().toLowerCase())){
+                    if(category.getCategory().toString().toLowerCase().contains(charSequence.toString().toLowerCase())){
                         filteredList.add(category);
                     }
                 }
@@ -88,7 +88,7 @@ public class myAdapterClass extends RecyclerView.Adapter<myAdapterClass.myviewho
         @Override
         protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
             dataholder.clear();
-            dataholder.addAll((Collection<? extends UserHelperClass>) filterResults.values);
+            dataholder.addAll((ArrayList<UserHelperClass>) filterResults.values);
             notifyDataSetChanged();
         }
     };
