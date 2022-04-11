@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Locale;
 
-public class myAdapterClass extends RecyclerView.Adapter<myAdapterClass.myviewholder> implements Filterable
+public class myAdapterClass extends RecyclerView.Adapter<myAdapterClass.myviewholder>
 {
     Context context;
     ArrayList<UserHelperClass> dataholder;
@@ -57,41 +57,6 @@ public class myAdapterClass extends RecyclerView.Adapter<myAdapterClass.myviewho
     public int getItemCount() {
         return dataholder.size();
     }
-
-    @Override
-    public Filter getFilter() {
-        return filter;
-    }
-
-    Filter filter = new Filter() {
-
-        @Override
-        protected FilterResults performFiltering(CharSequence charSequence) {
-
-            ArrayList<UserHelperClass> filteredList = new ArrayList<>();
-
-            if(charSequence.toString().isEmpty()){
-                filteredList.addAll(dataholderAll);
-            } else {
-                for(UserHelperClass category: dataholderAll) {
-                    if(category.getCategory().toString().toLowerCase().contains(charSequence.toString().toLowerCase())){
-                        filteredList.add(category);
-                    }
-                }
-            }
-            FilterResults filterResults = new FilterResults();
-            filterResults.values = filteredList;
-
-            return filterResults;
-        }
-
-        @Override
-        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-            dataholder.clear();
-            dataholder.addAll((ArrayList<UserHelperClass>) filterResults.values);
-            notifyDataSetChanged();
-        }
-    };
 
     class myviewholder extends RecyclerView.ViewHolder implements View.OnClickListener
     {

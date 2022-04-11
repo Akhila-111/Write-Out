@@ -42,9 +42,9 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
-                android:drawableTop="@drawable/ic_baseline_red_favorite_24"
-                android:background="#4AA0EC"
-                android:layout_marginLeft="150dp"
+                android:src="@drawable/ic_baseline_red_favorite_24"
+                android:layout_marginLeft="180dp"
+                android:background="@color/white"
                 />
 
 

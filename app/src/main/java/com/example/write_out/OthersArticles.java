@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,6 +30,8 @@ public class OthersArticles extends Fragment {
     DatabaseReference databaseReference;
     OtherArtsAdapter myAdapter;
     ArrayList<UserHelperClass> list;
+    FirebaseAuth auth;
+    FirebaseUser user;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,6 +41,7 @@ public class OthersArticles extends Fragment {
 
        recview= view.findViewById(R.id.recview2);
        recview.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
+
        databaseReference = FirebaseDatabase.getInstance().getReference("Users");
         list = new ArrayList<>();
         myAdapter = new OtherArtsAdapter(getActivity().getApplicationContext(),list);

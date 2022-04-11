@@ -17,6 +17,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -84,6 +85,8 @@ public class MyArticles extends Fragment {
         recyclerView.setAdapter(Myadapter);
         return view;
 
+
+
     }
 
     private void setOnClickListener() {
@@ -110,10 +113,28 @@ public class MyArticles extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                Myadapter.getFilter().filter(newText);
+               filter(newText);
                 return false;
             }
         });
-        super.onCreateOptionsMenu(menu, inflater);
+     //  return true;
+           super.onCreateOptionsMenu(menu,inflater);
     }
+
+    private void filter(String text)
+    {
+        ArrayList<UserHelperClass> filteredList = new ArrayList<>();
+        for(UserHelperClass item : dataholder ){
+            if(item.getCategory().contains(text.toLowerCase())){
+                filteredList.add(item);
+            }
+        }
+        if(filteredList.isEmpty()){
+           Toast.makeText(getActivity().getApplicationContext(),"No data found...",Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Myadapter.filterList(filteredList);
+        }
+    }
+    
 }

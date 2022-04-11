@@ -6,17 +6,16 @@
     android:layout_height="match_parent">
 
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/nestedScrollView"
-        android:layout_width="412dp"
-        android:layout_height="605dp"
+        android:id="@+id/nestedScrollView1"
+        android:layout_width="411dp"
+        android:layout_height="521dp"
 
-
+        android:layout_marginTop="72dp"
         android:fillViewport="true"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.107">
+        app:layout_constraintTop_toTopOf="parent">
 
         <EditText
             android:id="@+id/addText1"
@@ -25,39 +24,12 @@
             android:ems="10"
             android:hint="Article body"
             android:inputType="textMultiLine"
-            android:maxLines="25"
+            android:maxLines="255"
             android:scrollbars="vertical"
-            android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.123" />
     </androidx.core.widget.NestedScrollView>
-
-    <Button
-        android:id="@+id/button9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Edit"
-        android:backgroundTint="#A7DEE4"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.108"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.951" />
-
-    <Button
-        android:id="@+id/button10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="delete"
-        android:backgroundTint="#A7DEE4"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.885"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.951" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
