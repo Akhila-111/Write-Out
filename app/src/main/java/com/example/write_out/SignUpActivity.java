@@ -22,6 +22,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -39,6 +40,7 @@ public class SignUpActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     EditText signUpUserName;
     DatabaseReference reference;
+    FirebaseUser user;
 
 
     SharedPreferences sharedPreferences;
@@ -69,7 +71,11 @@ public class SignUpActivity extends AppCompatActivity {
 
        });
 
-
+        FirebaseUser user = mAuth.getCurrentUser();
+        if(user!= null)
+        {
+            Toast.makeText(SignUpActivity.this,"Welcome "+ user.getDisplayName(),Toast.LENGTH_SHORT).show();
+        }
 
         LoginHere.setOnClickListener(view -> {
 
@@ -77,6 +83,9 @@ public class SignUpActivity extends AppCompatActivity {
             startActivity(new Intent(SignUpActivity.this,LoginActivity.class));
         });
     }
+
+
+
 
     private void savedata(){
         sharedPreferences = getSharedPreferences(Shared_pref_name,MODE_PRIVATE);

@@ -19,6 +19,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.facebook.shimmer.Shimmer;
+import com.facebook.shimmer.ShimmerFrameLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,8 +37,10 @@ public class MyArticles extends Fragment {
     private AlertDialog.Builder mySpinner;
     RecyclerView recyclerView;
     DatabaseReference database;
+    FirebaseUser user;
     myAdapterClass Myadapter;
     ArrayList<UserHelperClass> dataholder;
+    ShimmerFrameLayout shimmerFrameLayout;
     private myAdapterClass.RecyclerViewClickListener listener;
 
 
@@ -45,13 +51,17 @@ public class MyArticles extends Fragment {
                              Bundle savedInstanceState)
     {
         // Inflate the layout for this fragment
+
         setHasOptionsMenu(true);
         View view = inflater.inflate(R.layout.fragment_my_articles, container, false);
         recyclerView = view.findViewById(R.id.recview);
+        shimmerFrameLayout = view.findViewById(R.id.shimmer);
+        shimmerFrameLayout.startShimmer();
 
         setOnClickListener();
         dataholder = new ArrayList<>();
         database = FirebaseDatabase.getInstance().getReference("Users");
+
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
 
@@ -66,10 +76,14 @@ public class MyArticles extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
+                shimmerFrameLayout.stopShimmer();
+                shimmerFrameLayout.setVisibility(View.GONE);
+                recyclerView.setVisibility(View.VISIBLE);
+
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
 
                    UserHelperClass data = dataSnapshot.getValue(UserHelperClass.class);
-                   Log.d("Tag",data.userName);
+              //     Log.d("Tag",data.userName);
                    dataholder.add(data);
 
                 }
@@ -84,8 +98,6 @@ public class MyArticles extends Fragment {
 
         recyclerView.setAdapter(Myadapter);
         return view;
-
-
 
     }
 
@@ -136,5 +148,4 @@ public class MyArticles extends Fragment {
             Myadapter.filterList(filteredList);
         }
     }
-    
 }

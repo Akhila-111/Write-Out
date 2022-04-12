@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -32,6 +33,7 @@ public class OthersArticles extends Fragment {
     ArrayList<UserHelperClass> list;
     FirebaseAuth auth;
     FirebaseUser user;
+    ShimmerFrameLayout shimmerFrameLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,6 +42,8 @@ public class OthersArticles extends Fragment {
        View view = inflater.inflate(R.layout.fragment_others_articles, container, false);
 
        recview= view.findViewById(R.id.recview2);
+       shimmerFrameLayout = view.findViewById(R.id.shimmer);
+       shimmerFrameLayout.startShimmer();
        recview.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
 
        databaseReference = FirebaseDatabase.getInstance().getReference("Users");
@@ -50,6 +54,11 @@ public class OthersArticles extends Fragment {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                shimmerFrameLayout.stopShimmer();
+                shimmerFrameLayout.setVisibility(View.GONE);
+                recview.setVisibility(View.VISIBLE);
+
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                     UserHelperClass user = dataSnapshot.getValue(UserHelperClass.class);
                     list.add(user);

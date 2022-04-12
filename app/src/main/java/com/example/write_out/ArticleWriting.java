@@ -31,6 +31,7 @@ public class ArticleWriting extends AppCompatActivity {
 
     DatabaseReference reference ;
 
+
     SharedPreferences sharedPreferences ;
     private static final String Shared_pref_name = "mypref";
     private static final String Key_Name = "name";
@@ -73,7 +74,7 @@ public class ArticleWriting extends AppCompatActivity {
 
             String s = userName + "_" + ArtTitle;
             UserHelperClass helperClass = new UserHelperClass(userName,ArtTitle,Category,dateOfPub,Articlebody);
-            reference.child(s).setValue(helperClass);
+            reference.child(userName).child(s).setValue(helperClass);
 
             Toast.makeText(this, "ARTICLE UPLOADED", Toast.LENGTH_SHORT).show();
         });

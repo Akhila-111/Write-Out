@@ -4,12 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +20,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -26,8 +29,10 @@ public class LoginActivity extends AppCompatActivity {
     Button login;
     Button signUp;
     TextView forgotPassword;
+    ProgressDialog progressDialog;
 
     FirebaseAuth mAuth ;
+    FirebaseUser user ;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -45,10 +50,21 @@ public class LoginActivity extends AppCompatActivity {
 
         login.setOnClickListener(view -> {
             loginUser();
+
+            progressDialog = new ProgressDialog(LoginActivity.this);
+            progressDialog.show();
+            progressDialog.setContentView(R.layout.progress_dialog);
+            progressDialog.getWindow().setBackgroundDrawableResource(
+                    android.R.color.transparent
+            );
+
         });
+
+
         signUp.setOnClickListener(view -> {
             startActivity(new Intent(LoginActivity.this,SignUpActivity.class));
         });
+
 
         forgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +73,16 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        FirebaseUser user = mAuth.getCurrentUser();
+        if(user!= null)
+        {
+            Toast.makeText(LoginActivity.this,"Welcome "+ user.getDisplayName(),Toast.LENGTH_SHORT).show();
+        }
+
+    }
+    @Override
+    public void onBackPressed(){
+        progressDialog.dismiss();
     }
 
 
