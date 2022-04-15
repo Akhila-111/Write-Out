@@ -15,10 +15,13 @@ public class OtherArtsAdapter extends RecyclerView.Adapter<OtherArtsAdapter.myVi
 
     Context context;
     ArrayList<UserHelperClass> list;
+    private static OtherArtsAdapter.RecyclerViewClickListener Listener;
 
-    public OtherArtsAdapter(Context context, ArrayList<UserHelperClass> list) {
+
+    public OtherArtsAdapter(Context context, ArrayList<UserHelperClass> list,OtherArtsAdapter.RecyclerViewClickListener Listener) {
         this.context = context;
         this.list = list;
+        this.Listener = Listener;
     }
 
     @NonNull
@@ -43,7 +46,8 @@ public class OtherArtsAdapter extends RecyclerView.Adapter<OtherArtsAdapter.myVi
         return list.size();
     }
 
-    public static class myViewHolder extends RecyclerView.ViewHolder{
+    public static class myViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
+    {
 
         TextView userName,ArticleTitle,Category,DateOfPublication,ArticleBody;
 
@@ -54,6 +58,17 @@ public class OtherArtsAdapter extends RecyclerView.Adapter<OtherArtsAdapter.myVi
             Category = itemView.findViewById(R.id.category);
             DateOfPublication = itemView.findViewById(R.id.date);
             // ArticleBody = itemView.findViewById(R.id.articleBody);
+
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            Listener.onClick(view,getAdapterPosition());
         }
     }
+    public interface  RecyclerViewClickListener{
+        void onClick(View v,int position);
+    }
+
 }

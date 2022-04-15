@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
         Adapter.addFragment(new MyArticles(),"My Articles");
         Adapter.addFragment(new OthersArticles(),"Others Articles");
         Adapter.addFragment(new Favourites(),"Favourites");
-        Adapter.addFragment(new ReadingList(),"Reading List");
         viewPager.setAdapter(adapter);
 
         floatingActionButton.setOnClickListener(view -> {

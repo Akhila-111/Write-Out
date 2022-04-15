@@ -46,6 +46,7 @@ public class MyArticles extends Fragment {
 
 
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
@@ -60,7 +61,7 @@ public class MyArticles extends Fragment {
 
         setOnClickListener();
         dataholder = new ArrayList<>();
-        database = FirebaseDatabase.getInstance().getReference("Articles");
+        database = FirebaseDatabase.getInstance().getReference("Articles").child("Users Articles");
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));

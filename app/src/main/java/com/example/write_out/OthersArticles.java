@@ -36,7 +36,7 @@ public class OthersArticles extends Fragment {
     FirebaseAuth auth;
     FirebaseUser user;
     ShimmerFrameLayout shimmerFrameLayout;
-    private myAdapterClass.RecyclerViewClickListener listener;
+    private OtherArtsAdapter.RecyclerViewClickListener Listener;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,7 +53,7 @@ public class OthersArticles extends Fragment {
 
        databaseReference = FirebaseDatabase.getInstance().getReference("Articles");
         list = new ArrayList<>();
-        myAdapter = new OtherArtsAdapter(getActivity().getApplicationContext(),list);
+        myAdapter = new OtherArtsAdapter(getActivity().getApplicationContext(),list,Listener);
         recview.setAdapter(myAdapter);
 
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -80,7 +80,7 @@ public class OthersArticles extends Fragment {
     }
 
     private void setOnClickListener() {
-        listener = new myAdapterClass.RecyclerViewClickListener() {
+        Listener = new OtherArtsAdapter.RecyclerViewClickListener() {
             @Override
             public void onClick(View v, int position) {
                 Intent intent = new Intent(v.getContext(),ArticleActivity.class);

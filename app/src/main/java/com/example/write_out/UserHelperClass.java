@@ -3,18 +3,18 @@ package com.example.write_out;
 import java.util.Locale;
 
 public class UserHelperClass {
-    String articleBody="  ",articleTitle=" ",category=" ",dateOfPublication=" ",userName=" ";
+    String articleBody = " ", articleTitle = " ", category = " ", dateOfPublication = " ", userName = " ";
 
     public UserHelperClass() {
 
     }
 
-   public UserHelperClass(String userName,String articleTitle,String category,String dateOfPublication,String articleBody) {
-         this.articleBody = articleBody;
+    public UserHelperClass(String userName, String articleTitle, String category, String dateOfPublication, String articleBody) {
+        this.articleBody = articleBody;
         this.articleTitle = articleTitle;
         this.category = category;
         this.dateOfPublication = dateOfPublication;
-        this.userName =userName;
+        this.userName = userName;
 
     }
 
@@ -23,15 +23,21 @@ public class UserHelperClass {
         return userName;
     }
 
-    public String getArticleTitle() { return articleTitle; }
+    public String getArticleTitle() {
+        return articleTitle;
+    }
 
-    public String getCategory(){ return category;}
+    public String getCategory() {
+        return category;
+    }
 
     public String getdateOfPublication() {
         return dateOfPublication;
     }
 
-    public String getArticleBody() { return articleBody;}
+    public String getArticleBody() {
+        return articleBody;
+    }
 
     public void setArticleBody(String articleBody) {
         this.articleBody = articleBody;
@@ -48,7 +54,9 @@ public class UserHelperClass {
     public void setDateOfPublication(String dateOfPublication) {
         this.dateOfPublication = dateOfPublication;
     }
+
     public void setUserName(String userName) {
         this.userName = userName;
     }
+
 }
