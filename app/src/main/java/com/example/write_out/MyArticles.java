@@ -60,12 +60,12 @@ public class MyArticles extends Fragment {
 
         setOnClickListener();
         dataholder = new ArrayList<>();
-        database = FirebaseDatabase.getInstance().getReference("Users");
+        database = FirebaseDatabase.getInstance().getReference("Articles");
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
 
-  
+
 
         dataholder = new ArrayList<>();
         Myadapter = new myAdapterClass(getActivity().getApplicationContext(),dataholder,listener);
@@ -82,9 +82,9 @@ public class MyArticles extends Fragment {
 
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
 
-                   UserHelperClass data = dataSnapshot.getValue(UserHelperClass.class);
-              //     Log.d("Tag",data.userName);
-                   dataholder.add(data);
+                    UserHelperClass data = dataSnapshot.getValue(UserHelperClass.class);
+                    //     Log.d("Tag",data.userName);
+                    dataholder.add(data);
 
                 }
                 Myadapter.notifyDataSetChanged();
@@ -125,12 +125,12 @@ public class MyArticles extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-               filter(newText);
+                filter(newText);
                 return false;
             }
         });
-     //  return true;
-           super.onCreateOptionsMenu(menu,inflater);
+        //  return true;
+        super.onCreateOptionsMenu(menu,inflater);
     }
 
     private void filter(String text)
@@ -142,7 +142,7 @@ public class MyArticles extends Fragment {
             }
         }
         if(filteredList.isEmpty()){
-           Toast.makeText(getActivity().getApplicationContext(),"No data found...",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity().getApplicationContext(),"No data found...",Toast.LENGTH_SHORT).show();
         }
         else{
             Myadapter.filterList(filteredList);

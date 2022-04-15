@@ -1,5 +1,6 @@
 package com.example.write_out;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -23,6 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.auth.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class OthersArticles extends Fragment {
@@ -34,19 +36,22 @@ public class OthersArticles extends Fragment {
     FirebaseAuth auth;
     FirebaseUser user;
     ShimmerFrameLayout shimmerFrameLayout;
+    private myAdapterClass.RecyclerViewClickListener listener;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
        View view = inflater.inflate(R.layout.fragment_others_articles, container, false);
+        setOnClickListener();
 
        recview= view.findViewById(R.id.recview2);
        shimmerFrameLayout = view.findViewById(R.id.shimmer);
        shimmerFrameLayout.startShimmer();
        recview.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
 
-       databaseReference = FirebaseDatabase.getInstance().getReference("Users");
+
+       databaseReference = FirebaseDatabase.getInstance().getReference("Articles");
         list = new ArrayList<>();
         myAdapter = new OtherArtsAdapter(getActivity().getApplicationContext(),list);
         recview.setAdapter(myAdapter);
@@ -73,4 +78,15 @@ public class OthersArticles extends Fragment {
         });
        return view;
     }
+
+    private void setOnClickListener() {
+        listener = new myAdapterClass.RecyclerViewClickListener() {
+            @Override
+            public void onClick(View v, int position) {
+                Intent intent = new Intent(v.getContext(),ArticleActivity.class);
+                intent.putExtra("ArticleBody",list.get(position).getArticleBody());
+                startActivity(intent);
+            }
+        };
+  }
 }

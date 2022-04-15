@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -41,7 +42,7 @@ public class SignUpActivity extends AppCompatActivity {
     EditText signUpUserName;
     DatabaseReference reference;
     FirebaseUser user;
-
+    ProgressDialog progressDialog;
 
     SharedPreferences sharedPreferences;
     private static final String Shared_pref_name = "mypref";
@@ -116,6 +117,11 @@ public class SignUpActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
+                    progressDialog = new ProgressDialog(SignUpActivity.this);
+                    progressDialog.show();
+                    progressDialog.setContentView(R.layout.progress_dialog2);
+                    progressDialog.getWindow().setBackgroundDrawableResource(
+                            android.R.color.transparent);
                     Toast.makeText(SignUpActivity.this,"User Registered Successfully",Toast.LENGTH_LONG).show();
                     startActivity(new Intent(SignUpActivity.this,LoginActivity.class));
                 }

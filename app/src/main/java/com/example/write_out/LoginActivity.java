@@ -49,14 +49,8 @@ public class LoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         login.setOnClickListener(view -> {
-            loginUser();
 
-            progressDialog = new ProgressDialog(LoginActivity.this);
-            progressDialog.show();
-            progressDialog.setContentView(R.layout.progress_dialog);
-            progressDialog.getWindow().setBackgroundDrawableResource(
-                    android.R.color.transparent
-            );
+            loginUser();
 
         });
 
@@ -104,6 +98,13 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                    if(task.isSuccessful()){
+
+                       progressDialog = new ProgressDialog(LoginActivity.this);
+                       progressDialog.show();
+                       progressDialog.setContentView(R.layout.progress_dialog);
+                       progressDialog.getWindow().setBackgroundDrawableResource(
+                               android.R.color.transparent);
+
                        Toast.makeText(LoginActivity.this,"User Logged in successfully",Toast.LENGTH_LONG).show();
                        startActivity(new Intent(LoginActivity.this,MainActivity.class));
                    }

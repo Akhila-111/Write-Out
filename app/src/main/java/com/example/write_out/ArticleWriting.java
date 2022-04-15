@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -30,7 +32,6 @@ public class ArticleWriting extends AppCompatActivity {
     public Button button ;
 
     DatabaseReference reference ;
-
 
     SharedPreferences sharedPreferences ;
     private static final String Shared_pref_name = "mypref";
@@ -63,7 +64,7 @@ public class ArticleWriting extends AppCompatActivity {
         category.setText(categoryShPref);
         DateOfPublication.setText(date);
 
-        reference = FirebaseDatabase.getInstance().getReference().child("Users");
+        reference = FirebaseDatabase.getInstance().getReference().child("Articles");
 
         button.setOnClickListener(view -> {
             String Articlebody = add_text.getText().toString();
@@ -74,7 +75,7 @@ public class ArticleWriting extends AppCompatActivity {
 
             String s = userName + "_" + ArtTitle;
             UserHelperClass helperClass = new UserHelperClass(userName,ArtTitle,Category,dateOfPub,Articlebody);
-            reference.child(userName).child(s).setValue(helperClass);
+            reference.child(s).setValue(helperClass);
 
             Toast.makeText(this, "ARTICLE UPLOADED", Toast.LENGTH_SHORT).show();
         });
