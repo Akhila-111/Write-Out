@@ -32,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
 
     FirebaseAuth mAuth ;
-    FirebaseUser user ;
+
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -116,56 +116,6 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
