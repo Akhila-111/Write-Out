@@ -64,7 +64,7 @@ public class ArticleWriting extends AppCompatActivity {
         category.setText(categoryShPref);
         DateOfPublication.setText(date);
 
-        reference = FirebaseDatabase.getInstance().getReference().child("Articles").child("Users Articles");
+        reference = FirebaseDatabase.getInstance().getReference().child("Articles");
 
         button.setOnClickListener(view -> {
             String Articlebody = add_text.getText().toString();

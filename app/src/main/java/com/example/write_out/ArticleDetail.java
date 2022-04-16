@@ -52,7 +52,7 @@ public class ArticleDetail extends AppCompatActivity {
         UserName.setText(name);
 
 
-        reference = FirebaseDatabase.getInstance().getReference().child("Users");
+        reference = FirebaseDatabase.getInstance().getReference().child("Articles");
 
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(ArticleDetail.this,
                 android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.names));

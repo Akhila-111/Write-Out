@@ -57,8 +57,8 @@ public class myAdapterClass extends RecyclerView.Adapter<myAdapterClass.myviewho
     @NonNull
     @Override
     public myviewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-       View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.my_articles_items,parent,false);
-       return new myviewholder(view);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.my_articles_items,parent,false);
+        return new myviewholder(view);
     }
 
     @Override
@@ -86,7 +86,6 @@ public class myAdapterClass extends RecyclerView.Adapter<myAdapterClass.myviewho
                     public void onClick(DialogInterface dialogInterface, int i) {
                         FirebaseDatabase.getInstance().getReference()
                                 .child("Articles")
-                                .child("Users Articles")
                                 .child(s).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
@@ -99,10 +98,10 @@ public class myAdapterClass extends RecyclerView.Adapter<myAdapterClass.myviewho
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                       Toast.makeText(holder.userName.getContext(), "Cancelled",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(holder.userName.getContext(), "Cancelled",Toast.LENGTH_SHORT).show();
                     }
                 });
-                    builder.show();
+                builder.show();
 
             }
         });
@@ -127,8 +126,8 @@ public class myAdapterClass extends RecyclerView.Adapter<myAdapterClass.myviewho
             Category = itemView.findViewById(R.id.category);
             DateOfPublication = itemView.findViewById(R.id.date);
             deleteImg = itemView.findViewById(R.id.delete);
-          //favourite = itemView.findViewById(R.id.favourite);
-           // ArticleBody = itemView.findViewById(R.id.articleBody);
+            //favourite = itemView.findViewById(R.id.favourite);
+            // ArticleBody = itemView.findViewById(R.id.articleBody);
 
             itemView.setOnClickListener(this);
         }

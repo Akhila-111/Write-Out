@@ -1,7 +1,10 @@
 package com.example.write_out;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.icu.text.CaseMap;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,6 +20,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.shimmer.Shimmer;
@@ -28,8 +33,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.auth.User;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 
 public class MyArticles extends Fragment {
@@ -44,31 +51,26 @@ public class MyArticles extends Fragment {
     private myAdapterClass.RecyclerViewClickListener listener;
 
 
-
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
         // Inflate the layout for this fragment
-
+        setOnClickListener();
         setHasOptionsMenu(true);
         View view = inflater.inflate(R.layout.fragment_my_articles, container, false);
         recyclerView = view.findViewById(R.id.recview);
         shimmerFrameLayout = view.findViewById(R.id.shimmer);
         shimmerFrameLayout.startShimmer();
 
-        setOnClickListener();
+
         dataholder = new ArrayList<>();
-        database = FirebaseDatabase.getInstance().getReference("Articles").child("Users Articles");
+
+
+        database = FirebaseDatabase.getInstance().getReference("Articles");
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
-
-
-
-        dataholder = new ArrayList<>();
         Myadapter = new myAdapterClass(getActivity().getApplicationContext(),dataholder,listener);
 
 
@@ -138,7 +140,7 @@ public class MyArticles extends Fragment {
     {
         ArrayList<UserHelperClass> filteredList = new ArrayList<>();
         for(UserHelperClass item : dataholder ){
-            if(item.getCategory().contains(text.toLowerCase())){
+            if(item.getCategory().toLowerCase().contains(text.toLowerCase())){
                 filteredList.add(item);
             }
         }
