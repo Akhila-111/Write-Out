@@ -19,6 +19,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -28,7 +29,9 @@ public class OtherArtsAdapter extends RecyclerView.Adapter<OtherArtsAdapter.myVi
     Context context;
     ArrayList<UserHelperClass> list;
     private static OtherArtsAdapter.RecyclerViewClickListener Listener;
-
+    static FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference databaseReference,fvrtref,fvrt_listRef;
+    Boolean fvrtChecker = false;
 
 
     public OtherArtsAdapter(Context context, ArrayList<UserHelperClass> list,OtherArtsAdapter.RecyclerViewClickListener Listener) {
@@ -63,7 +66,73 @@ public class OtherArtsAdapter extends RecyclerView.Adapter<OtherArtsAdapter.myVi
 
         String s = helperClass.userName + "_" + helperClass.articleTitle;
 
+        fvrtref = database.getReference("favourites");
+        fvrt_listRef = database.getReference("favouriteList").child(s);
+
+        holder.favouriteChecker(s);
+        holder.favouriteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                fvrtChecker = true;
+
+                fvrtref.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                        if(fvrtChecker.equals(true)){
+                            if(snapshot.hasChild(s)){
+                                fvrtref.child(s).removeValue();
+                                delete(s);
+                                fvrtChecker = false;
+                            } else {
+                                fvrtref.child("Articles").child(s).setValue(true);
+                                helperClass.setCategory(helperClass.category);
+                                helperClass.setArticleBody(helperClass.articleBody);
+                                helperClass.setArticleTitle(helperClass.articleTitle);
+                                helperClass.setUserName(helperClass.userName);
+                                helperClass.setDateOfPublication(helperClass.dateOfPublication);
+
+                                String id = fvrt_listRef.push().getKey();
+                                fvrt_listRef.child(s).setValue(list);
+                                fvrtChecker = false;
+                            }
+                        }
+
+                    }
+
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+            }
+        });
+
     }
+
+    public void delete (String s){
+        Query query = fvrt_listRef.child(s);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot dataSnapshot1 : snapshot.getChildren()){
+                    dataSnapshot1.getRef().removeValue();
+
+                    Toast.makeText(context.getApplicationContext(),"Deleted",Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+
 
 
     @Override
@@ -75,7 +144,8 @@ public class OtherArtsAdapter extends RecyclerView.Adapter<OtherArtsAdapter.myVi
     {
 
         TextView userName,ArticleTitle,Category,DateOfPublication,ArticleBody;
-        ImageView favouritesBtn;
+        ImageView favouriteBtn;
+        private DatabaseReference fvrtref;
 
 
         public myViewHolder(@NonNull View itemView) {
@@ -84,7 +154,7 @@ public class OtherArtsAdapter extends RecyclerView.Adapter<OtherArtsAdapter.myVi
             ArticleTitle = itemView.findViewById(R.id.title);
             Category = itemView.findViewById(R.id.category);
             DateOfPublication = itemView.findViewById(R.id.date);
-            favouritesBtn = itemView.findViewById(R.id.fav);
+            favouriteBtn = itemView.findViewById(R.id.fav);
             // ArticleBody = itemView.findViewById(R.id.articleBody);
 
             itemView.setOnClickListener(this);
@@ -93,6 +163,30 @@ public class OtherArtsAdapter extends RecyclerView.Adapter<OtherArtsAdapter.myVi
         @Override
         public void onClick(View view) {
             Listener.onClick(view,getAdapterPosition());
+        }
+
+        public void favouriteChecker(String s) {
+
+            favouriteBtn = itemView.findViewById(R.id.fav);
+            fvrtref = database.getReference("favourties");
+
+            fvrtref.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                    if(snapshot.hasChild(s)){
+                        favouriteBtn.setImageResource(R.drawable.ic_baseline_red_favorite_24);
+                    } else {
+                        favouriteBtn.setImageResource(R.drawable.ic_outline_favorite_border_24);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
         }
     }
     public interface  RecyclerViewClickListener{

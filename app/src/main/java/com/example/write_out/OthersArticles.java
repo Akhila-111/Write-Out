@@ -47,20 +47,19 @@ public class OthersArticles extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-       View view = inflater.inflate(R.layout.fragment_others_articles, container, false);
+        View view = inflater.inflate(R.layout.fragment_others_articles, container, false);
         setOnClickListener();
         setHasOptionsMenu(true);
-       recview= view.findViewById(R.id.recview2);
-       shimmerFrameLayout = view.findViewById(R.id.shimmer);
-       shimmerFrameLayout.startShimmer();
-       recview.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
+        recview = view.findViewById(R.id.recview2);
+        shimmerFrameLayout = view.findViewById(R.id.shimmer);
+        shimmerFrameLayout.startShimmer();
+        recview.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
 
 
         databaseReference = FirebaseDatabase.getInstance().getReference("Articles");
         list = new ArrayList<>();
-        myAdapter = new OtherArtsAdapter(getActivity().getApplicationContext(),list,Listener);
+        myAdapter = new OtherArtsAdapter(getActivity().getApplicationContext(), list, Listener);
         recview.setAdapter(myAdapter);
-
 
 
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -71,7 +70,7 @@ public class OthersArticles extends Fragment {
                 shimmerFrameLayout.setVisibility(View.GONE);
                 recview.setVisibility(View.VISIBLE);
 
-                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     UserHelperClass user = dataSnapshot.getValue(UserHelperClass.class);
                     list.add(user);
                 }
@@ -83,23 +82,23 @@ public class OthersArticles extends Fragment {
 
             }
         });
-       return view;
+        return view;
     }
 
     private void setOnClickListener() {
         Listener = new OtherArtsAdapter.RecyclerViewClickListener() {
             @Override
             public void onClick(View v, int position) {
-                Intent intent = new Intent(v.getContext(),ArticleActivity.class);
-                intent.putExtra("ArticleBody",list.get(position).getArticleBody());
+                Intent intent = new Intent(v.getContext(), ArticleActivity.class);
+                intent.putExtra("ArticleBody", list.get(position).getArticleBody());
                 startActivity(intent);
             }
         };
-  }
+    }
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.search_menu,menu);
+        inflater.inflate(R.menu.search_menu, menu);
         MenuItem item = menu.findItem(R.id.actionSearch);
         SearchView searchView = (SearchView) item.getActionView();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -115,21 +114,19 @@ public class OthersArticles extends Fragment {
             }
         });
         //  return true;
-        super.onCreateOptionsMenu(menu,inflater);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
-    private void filter(String text)
-    {
+    private void filter(String text) {
         ArrayList<UserHelperClass> filteredList = new ArrayList<>();
-        for(UserHelperClass item : list ){
-            if(item.getCategory().toLowerCase().contains(text.toLowerCase())){
+        for (UserHelperClass item : list) {
+            if (item.getCategory().toLowerCase().contains(text.toLowerCase())) {
                 filteredList.add(item);
             }
         }
-        if(filteredList.isEmpty()){
-            Toast.makeText(getActivity().getApplicationContext(),"No data found...",Toast.LENGTH_SHORT).show();
-        }
-        else{
+        if (filteredList.isEmpty()) {
+            Toast.makeText(getActivity().getApplicationContext(), "No data found...", Toast.LENGTH_SHORT).show();
+        } else {
             myAdapter.filterList(filteredList);
         }
     }

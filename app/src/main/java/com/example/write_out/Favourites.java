@@ -32,12 +32,15 @@ import java.util.ArrayList;
  */
 public class Favourites extends Fragment {
 
-    DatabaseReference databaseRef;
+    DatabaseReference databaseRef,fvrtref,fvrt_listRef;
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
     RecyclerView recyclerView;
     ShimmerFrameLayout shimmerFrameLayout;
     FavouritesAdapter favAdapter;
     ArrayList<UserHelperClass> dataholder;
     FavouritesAdapter.RecyclerViewClickListener listen;
+    Boolean fvrtChecker = false;
+
 
 
 
@@ -88,6 +91,8 @@ public class Favourites extends Fragment {
         shimmerFrameLayout.startShimmer();
 
         dataholder = new ArrayList<>();
+
+
         databaseRef = FirebaseDatabase.getInstance().getReference("Articles");
 
         recyclerView.setHasFixedSize(true);

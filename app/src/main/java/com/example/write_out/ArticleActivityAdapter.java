@@ -45,43 +45,11 @@ public class ArticleActivityAdapter extends RecyclerView.Adapter<ArticleActivity
         holder.userName.setText(dataholder.get(position).getUserName());
         holder.ArticleTitle.setText(dataholder.get(position).getArticleTitle());
         holder.ArticleBody.setText(dataholder.get(position).getArticleBody());
-       // holder.Category.setText(dataholder.get(position).getCategory());
-       // holder.DateOfPublication.setText(dataholder.get(position).getdateOfPublication());
+        holder.Category.setText(dataholder.get(position).getCategory());
+        holder.DateOfPublication.setText(dataholder.get(position).getdateOfPublication());
 
         String s = helperClass.userName + "_" + helperClass.articleTitle;
 
-      holder.EditBtn.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View view) {
-              EditText ArticleBody = view.findViewById(R.id.addText1);
-              ArticleBody = new EditText(context.getApplicationContext());
-              ArticleBody.setText(dataholder.get(position).getArticleBody());
-
-              holder.UpdateBtn.setOnClickListener(new View.OnClickListener() {
-                  @Override
-                  public void onClick(View view) {
-                      Map<String,Object> map = new HashMap<>();
-                      map.put("articleBody",helperClass.articleBody.toString());
-
-                      FirebaseDatabase.getInstance().getReference().child("Aritcles")
-                              .child(s).updateChildren(map).addOnSuccessListener(new OnSuccessListener<Void>() {
-                          @Override
-                          public void onSuccess(Void unused) {
-                              Toast.makeText(holder.ArticleBody.getContext(),"Data Updated Successfully",Toast.LENGTH_SHORT).show();
-
-                          }
-                      })
-                              .addOnFailureListener(new OnFailureListener() {
-                                  @Override
-                                  public void onFailure(@NonNull Exception e) {
-                                      Toast.makeText(holder.ArticleBody.getContext(),"Error while Updating",Toast.LENGTH_SHORT).show();
-                                  }
-                              });
-                  }
-              });
-
-          }
-      });
     }
 
     @Override
@@ -101,8 +69,8 @@ public class ArticleActivityAdapter extends RecyclerView.Adapter<ArticleActivity
             userName = itemView.findViewById(R.id.user);
             ArticleTitle = itemView.findViewById(R.id.art_tit);
             ArticleBody = itemView.findViewById(R.id.addText1);
-            // Category = itemView.findViewById(R.id.category);
-            // DateOfPublication = itemView.findViewById(R.id.date);
+            Category = itemView.findViewById(R.id.cat);
+            DateOfPublication = itemView.findViewById(R.id.pubdate);
         }
     }
 }
