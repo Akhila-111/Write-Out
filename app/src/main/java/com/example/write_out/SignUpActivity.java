@@ -96,9 +96,9 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void createUser(){
-        String email = signUpEmail.getText().toString();
-        String password = signUpPassword.getText().toString();
-        String username = signUpUserName.getText().toString();
+        String email = signUpEmail.getText().toString().trim();
+        String password = signUpPassword.getText().toString().trim();
+        String username = signUpUserName.getText().toString().trim();
 
         if(TextUtils.isEmpty(email)){
             signUpEmail.setError("Email cannot be empty");

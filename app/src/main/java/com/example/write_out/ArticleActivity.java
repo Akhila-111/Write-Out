@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -19,13 +20,14 @@ public class ArticleActivity extends AppCompatActivity {
         setContentView(R.layout.article_layout);
         EditText ArtBody = findViewById(R.id.addText1);
 
-        String  ArticleBody = "Article not set";
+        String  ArticleBody = "Article not set ";
 
         Bundle extras = getIntent().getExtras();
         if(extras != null){
             ArticleBody = extras.getString("ArticleBody");
         }
         ArtBody.setText(ArticleBody);
+
 
         ArtBody.setOnTouchListener(new View.OnTouchListener() {
             @Override
