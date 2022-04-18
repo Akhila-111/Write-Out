@@ -67,7 +67,7 @@ public class OtherArtsAdapter extends RecyclerView.Adapter<OtherArtsAdapter.myVi
         String s = helperClass.userName + "_" + helperClass.articleTitle;
 
         fvrtref = database.getReference("favourites");
-        fvrt_listRef = database.getReference("favouriteList").child(s);
+        fvrt_listRef = database.getReference("favouriteList");
 
         holder.favouriteChecker(s);
         holder.favouriteBtn.setOnClickListener(new View.OnClickListener() {
@@ -86,14 +86,14 @@ public class OtherArtsAdapter extends RecyclerView.Adapter<OtherArtsAdapter.myVi
                                 delete(s);
                                 fvrtChecker = false;
                             } else {
-                                fvrtref.child("Articles").child(s).setValue(true);
+                                fvrtref.child(s).setValue(true);
                                 helperClass.setCategory(helperClass.category);
                                 helperClass.setArticleBody(helperClass.articleBody);
                                 helperClass.setArticleTitle(helperClass.articleTitle);
                                 helperClass.setUserName(helperClass.userName);
                                 helperClass.setDateOfPublication(helperClass.dateOfPublication);
 
-                                String id = fvrt_listRef.push().getKey();
+                                //String id = fvrt_listRef.push().getKey();
                                 fvrt_listRef.child(s).setValue(list);
                                 fvrtChecker = false;
                             }
@@ -121,7 +121,7 @@ public class OtherArtsAdapter extends RecyclerView.Adapter<OtherArtsAdapter.myVi
                 for(DataSnapshot dataSnapshot1 : snapshot.getChildren()){
                     dataSnapshot1.getRef().removeValue();
 
-                    Toast.makeText(context.getApplicationContext(),"Deleted",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context.getApplicationContext(),"Removed from Favourites",Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -168,7 +168,7 @@ public class OtherArtsAdapter extends RecyclerView.Adapter<OtherArtsAdapter.myVi
         public void favouriteChecker(String s) {
 
             favouriteBtn = itemView.findViewById(R.id.fav);
-            fvrtref = database.getReference("favourties");
+            fvrtref = database.getReference("favourites");
 
             fvrtref.addValueEventListener(new ValueEventListener() {
                 @Override

@@ -50,7 +50,7 @@
                 android:layout_marginStart="312dp"
                 android:layout_marginLeft="100dp"
                 android:layout_marginEnd="18dp"
-                android:background="@drawable/ic_baseline_red_favorite_24" />
+                android:background="@drawable/ic_outline_favorite_border_24" />
 
         </RelativeLayout>
 

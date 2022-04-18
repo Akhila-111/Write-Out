@@ -54,7 +54,7 @@ public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.my
         String s = helperClass.userName + "_" + helperClass.articleTitle;
 
         fvrtref = database.getReference("favourites");
-        fvrt_listRef = database.getReference("favouriteList").child(s);
+        fvrt_listRef = database.getReference("favouriteList");
 
         holder.favouriteChecker(s);
         holder.favouriteBtn.setOnClickListener(new View.OnClickListener() {
@@ -73,15 +73,15 @@ public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.my
                                 delete(s);
                                 fvrtChecker = false;
                             } else {
-                                fvrtref.child("Articles").child(s).setValue(true);
+                                fvrtref.child(s).setValue(true);
                                 helperClass.setCategory(helperClass.category);
                                 helperClass.setArticleBody(helperClass.articleBody);
                                 helperClass.setArticleTitle(helperClass.articleTitle);
                                 helperClass.setUserName(helperClass.userName);
                                 helperClass.setDateOfPublication(helperClass.dateOfPublication);
 
-                                String id = fvrt_listRef.push().getKey();
-                                fvrt_listRef.child(s).setValue(dataholder);
+                                //String id = fvrt_listRef.push().getKey();
+                                fvrt_listRef.child(s);
                                 fvrtChecker = false;
                             }
                         }
@@ -108,7 +108,7 @@ public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.my
                 for(DataSnapshot dataSnapshot1 : snapshot.getChildren()){
                     dataSnapshot1.getRef().removeValue();
 
-                    Toast.makeText(context.getApplicationContext(),"Deleted",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context.getApplicationContext(),"Removed from Favourites",Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -146,16 +146,16 @@ public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.my
 
         public void favouriteChecker(String s) {
             favouriteBtn = itemView.findViewById(R.id.fav);
-            fvrtref = database.getReference("favourties");
+            fvrtref = database.getReference("favourites");
 
             fvrtref.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                     if(snapshot.hasChild(s)){
-                        favouriteBtn.setImageResource(R.drawable.ic_baseline_red_favorite_24);
-                    } else {
                         favouriteBtn.setImageResource(R.drawable.ic_outline_favorite_border_24);
+                    } else {
+                        favouriteBtn.setImageResource(R.drawable.ic_baseline_red_favorite_24);
                     }
                 }
 
