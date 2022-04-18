@@ -93,8 +93,8 @@ public class OtherArtsAdapter extends RecyclerView.Adapter<OtherArtsAdapter.myVi
                                 helperClass.setUserName(helperClass.userName);
                                 helperClass.setDateOfPublication(helperClass.dateOfPublication);
 
-                                //String id = fvrt_listRef.push().getKey();
-                                fvrt_listRef.child(s).setValue(list);
+                                String id = fvrt_listRef.push().getKey();
+                                fvrt_listRef.child(s).setValue(list.get(position));
                                 fvrtChecker = false;
                             }
                         }

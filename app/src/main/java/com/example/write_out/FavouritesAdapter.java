@@ -81,7 +81,7 @@ public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.my
                                 helperClass.setDateOfPublication(helperClass.dateOfPublication);
 
                                 //String id = fvrt_listRef.push().getKey();
-                                fvrt_listRef.child(s);
+                                fvrt_listRef.child(s).setValue(dataholder);
                                 fvrtChecker = false;
                             }
                         }
@@ -153,9 +153,9 @@ public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.my
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                     if(snapshot.hasChild(s)){
-                        favouriteBtn.setImageResource(R.drawable.ic_outline_favorite_border_24);
-                    } else {
                         favouriteBtn.setImageResource(R.drawable.ic_baseline_red_favorite_24);
+                    } else {
+                        favouriteBtn.setImageResource(R.drawable.ic_outline_favorite_border_24);
                     }
                 }
 

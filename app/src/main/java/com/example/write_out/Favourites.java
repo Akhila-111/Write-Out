@@ -93,7 +93,7 @@ public class Favourites extends Fragment {
         dataholder = new ArrayList<>();
 
 
-        databaseRef = FirebaseDatabase.getInstance().getReference("Articles");
+        databaseRef = FirebaseDatabase.getInstance().getReference("favouriteList");
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
