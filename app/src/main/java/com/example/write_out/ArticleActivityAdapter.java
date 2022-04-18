@@ -49,7 +49,6 @@ public class ArticleActivityAdapter extends RecyclerView.Adapter<ArticleActivity
         holder.DateOfPublication.setText(dataholder.get(position).getdateOfPublication());
 
         String s = helperClass.userName + "_" + helperClass.articleTitle;
-
     }
 
     @Override
