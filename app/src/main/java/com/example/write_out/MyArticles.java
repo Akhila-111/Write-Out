@@ -47,8 +47,12 @@ public class MyArticles extends Fragment {
     FirebaseUser user;
     myAdapterClass Myadapter;
     ArrayList<UserHelperClass> dataholder;
+//    ArrayList<UserHelperClass> sorteddata;
     ShimmerFrameLayout shimmerFrameLayout;
     private myAdapterClass.RecyclerViewClickListener listener;
+    SharedPreferences sp;
+    private static final String Shared_pref_name = "mypref";
+    private static final String Key_Name = "name";
 
 
     @Override
@@ -66,18 +70,22 @@ public class MyArticles extends Fragment {
 
         dataholder = new ArrayList<>();
 
+//        sorteddata=new ArrayList<>();
 
+       // SharedPreferences sp ;
         database = FirebaseDatabase.getInstance().getReference("Articles");
-
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
-        Myadapter = new myAdapterClass(getActivity().getApplicationContext(),dataholder,listener);
 
-
+        sp = getContext().getSharedPreferences(Shared_pref_name,Context.MODE_PRIVATE);
+        String name = sp.getString(Key_Name,null);
+       //  sp= getContext().getSharedPreferences("username", Context.MODE_PRIVATE);
+       // String name=sp.getString("UserName","");
 
         database.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+
 
                 shimmerFrameLayout.stopShimmer();
                 shimmerFrameLayout.setVisibility(View.GONE);
@@ -86,10 +94,13 @@ public class MyArticles extends Fragment {
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
 
                     UserHelperClass data = dataSnapshot.getValue(UserHelperClass.class);
-                    //     Log.d("Tag",data.userName);
-                    dataholder.add(data);
+
+                    if(data.getUserName().equals(name))
+                        dataholder.add(data);
 
                 }
+                Log.d("qwerty", String.valueOf(dataholder.size()));
+                Myadapter = new myAdapterClass(getActivity().getApplicationContext(),dataholder,listener);
                 Myadapter.notifyDataSetChanged();
             }
 
@@ -98,6 +109,7 @@ public class MyArticles extends Fragment {
 
             }
         });
+
 
         recyclerView.setAdapter(Myadapter);
         return view;

@@ -73,6 +73,11 @@ public class ArticleWriting extends AppCompatActivity {
             String ArtTitle = Title.getText().toString();
             String dateOfPub = DateOfPublication.getText().toString();
 
+            SharedPreferences sp=getSharedPreferences("username",MODE_PRIVATE);
+            SharedPreferences.Editor editor=sp.edit();
+            editor.putString("UserName",userName);
+            editor.commit();
+
             String s = userName + "_" + ArtTitle;
             UserHelperClass helperClass = new UserHelperClass(userName,ArtTitle,Category,dateOfPub,Articlebody);
             reference.child(s).setValue(helperClass);

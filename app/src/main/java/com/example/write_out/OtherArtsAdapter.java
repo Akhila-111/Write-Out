@@ -1,5 +1,6 @@
 package com.example.write_out;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,7 +56,7 @@ public class OtherArtsAdapter extends RecyclerView.Adapter<OtherArtsAdapter.myVi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull myViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull myViewHolder holder, @SuppressLint("RecyclerView")  int position) {
         UserHelperClass helperClass = list.get(position);
         holder.userName.setText(list.get(position).getUserName());
         holder.ArticleTitle.setText(list.get(position).getArticleTitle());

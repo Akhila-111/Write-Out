@@ -44,7 +44,7 @@ public class myAdapterClass extends RecyclerView.Adapter<myAdapterClass.myviewho
     {
         this.context = context;
         this.dataholder = dataholder;
-        this.dataholderAll = new ArrayList<>(dataholder);
+//        this.dataholderAll = new ArrayList<>(dataholder);
         this.listener = listener;
     }
 

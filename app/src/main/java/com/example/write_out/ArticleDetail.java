@@ -77,7 +77,7 @@ public class ArticleDetail extends AppCompatActivity {
                 dataOfPublication.setError("Please mention today's date..");
             }
             else {
-            //    UserHelperClass helperClass = new UserHelperClass(userName, ArticleTitle, Category, DateOfPublication);
+              //  UserHelperClass helperClass = new UserHelperClass(userName, ArticleTitle, Category, DateOfPublication);
               //  reference.child(helperClass.userName).setValue(helperClass);
 
 
