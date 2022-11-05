@@ -18,7 +18,7 @@ public class ArticleActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.article_layout);
-        EditText ArtBody = findViewById(R.id.addText1);
+        TextView ArtBody = (TextView) findViewById(R.id.addText1);
 
         String  ArticleBody = "Article not set ";
 

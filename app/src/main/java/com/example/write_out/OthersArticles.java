@@ -101,6 +101,7 @@ public class OthersArticles extends Fragment {
         inflater.inflate(R.menu.search_menu, menu);
         MenuItem item = menu.findItem(R.id.actionSearch);
         SearchView searchView = (SearchView) item.getActionView();
+        searchView.setQueryHint("Search By Category...");
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {

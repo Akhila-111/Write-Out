@@ -63,8 +63,8 @@ public class ArticleActivityAdapter extends RecyclerView.Adapter<ArticleActivity
 
         public myViewHolder(@NonNull View itemView) {
             super(itemView);
-            UpdateBtn = itemView.findViewById(R.id.button9);
-            EditBtn = itemView.findViewById(R.id.button10);
+           // UpdateBtn = itemView.findViewById(R.id.button9);
+           // EditBtn = itemView.findViewById(R.id.button10);
             userName = itemView.findViewById(R.id.user);
             ArticleTitle = itemView.findViewById(R.id.art_tit);
             ArticleBody = itemView.findViewById(R.id.addText1);
